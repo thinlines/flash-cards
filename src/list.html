@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>All Cards - FSRS Flashcards</title>
+  <style>
+    @import "./styles.css";
+  </style>
+</head>
+<body class="min-h-dvh bg-[radial-gradient(1200px_800px_at_20%_10%,#0f172a_0%,#0b0f14_60%)] text-gray-200 antialiased">
+  <div class="mx-auto w-full max-w-screen-sm px-3 py-4 md:max-w-[920px] md:px-6 md:py-6">
+    <div class="mb-4 flex items-center justify-between">
+      <div class="text-base font-bold tracking-[0.2px] sm:text-lg">All Cards</div>
+      <a href="index.html" class="inline-flex shrink-0 items-center rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-gray-200 transition hover:bg-slate-800 active:translate-y-px md:px-4">Back</a>
+    </div>
+    <table class="w-full text-left text-sm text-gray-300" id="cards-table">
+      <thead>
+        <tr class="border-b border-slate-700 text-gray-400">
+          <th class="py-2 pr-4">ID</th>
+          <th class="py-2 pr-4">Front</th>
+          <th class="py-2">Due</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <script type="module">import "./list.ts"</script>
+</body>
+</html>

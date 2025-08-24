@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -15,9 +15,7 @@
     <!-- Top bar -->
     <div class="mb-3 flex flex-col gap-2 sm:mb-4 sm:flex-row sm:items-center sm:gap-3">
       <div class="flex items-center justify-between">
-        <div class="text-base font-bold tracking-[0.2px] sm:text-lg">
-          FSRS Flashcards
-        </div>
+        <div class="text-base font-bold tracking-[0.2px] sm:text-lg">FSRS Flashcards</div>
         <!-- Counts on the right for very small screens -->
         <div class="ml-3 flex items-center gap-2 sm:hidden">
           <span id="due-pill"
@@ -38,8 +36,12 @@
       </div>
 
       <!-- Actions: horizontally scrollable on mobile -->
-      <div
-        class="order-last -mx-3 flex gap-2 overflow-x-auto px-3 pb-1 pt-1 sm:order-none sm:ml-auto sm:overflow-visible sm:p-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <div class="order-last -mx-3 flex gap-2 overflow-x-auto px-3 pb-1 pt-1 sm:order-none sm:ml-auto sm:overflow-visible sm:p-0
+                  [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <a href="list.html" title="View all cards and due dates"
+          class="inline-flex shrink-0 items-center rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-gray-200 transition hover:bg-slate-800 active:translate-y-px md:px-4">
+          Cards
+        </a>
         <button id="export-btn" title="Download your study state as JSON"
           class="inline-flex shrink-0 items-center rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-gray-200 transition hover:bg-slate-800 active:translate-y-px md:px-4">
           Export
@@ -71,9 +73,7 @@
     <!-- Card -->
     <div id="card"
       class="rounded-[18px] border border-slate-700 bg-gradient-to-b from-slate-900 to-[#0b1020] p-[clamp(14px,4.5vw,28px)] shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
-      <div id="front" class="text-[clamp(18px,4.5vw,30px)] font-semibold">
-        Loading…
-      </div>
+      <div id="front" class="text-[clamp(18px,4.5vw,30px)] font-semibold">Loading…</div>
       <div id="back" class="mt-3 hidden text-[clamp(16px,3.8vw,24px)] text-gray-300"></div>
 
       <div id="show-row" class="mt-4 flex flex-wrap gap-3">
@@ -89,29 +89,25 @@
         <button
           class="rounded-lg border border-red-400/40 bg-red-900/40 px-3 py-3 text-center text-sm font-semibold text-red-100 transition hover:bg-red-900/50 active:translate-y-px"
           data-grade="1">
-          Again
-          <span
+          Again <span
             class="ml-1 inline-flex items-center rounded-md border border-slate-600 bg-slate-900 px-1.5 py-0.5 font-mono text-[11px] text-slate-300">1</span>
         </button>
         <button
           class="rounded-lg border border-amber-400/40 bg-amber-900/40 px-3 py-3 text-center text-sm font-semibold text-amber-100 transition hover:bg-amber-900/50 active:translate-y-px"
           data-grade="2">
-          Hard
-          <span
+          Hard <span
             class="ml-1 inline-flex items-center rounded-md border border-slate-600 bg-slate-900 px-1.5 py-0.5 font-mono text-[11px] text-slate-300">2</span>
         </button>
         <button
           class="rounded-lg border border-emerald-400/40 bg-emerald-900/40 px-3 py-3 text-center text-sm font-semibold text-emerald-100 transition hover:bg-emerald-900/50 active:translate-y-px"
           data-grade="3">
-          Good
-          <span
+          Good <span
             class="ml-1 inline-flex items-center rounded-md border border-slate-600 bg-slate-900 px-1.5 py-0.5 font-mono text-[11px] text-slate-300">3</span>
         </button>
         <button
           class="rounded-lg border border-cyan-400/40 bg-cyan-900/40 px-3 py-3 text-center text-sm font-semibold text-cyan-100 transition hover:bg-cyan-900/50 active:translate-y-px"
           data-grade="4">
-          Easy
-          <span
+          Easy <span
             class="ml-1 inline-flex items-center rounded-md border border-slate-600 bg-slate-900 px-1.5 py-0.5 font-mono text-[11px] text-slate-300">4</span>
         </button>
       </div>
@@ -126,14 +122,11 @@
     <!-- Footer -->
     <div class="mt-4 text-gray-400">
       <details id="help" class="rounded-lg border border-slate-700 bg-slate-900 p-2.5">
-        <summary class="cursor-pointer font-semibold text-slate-300">
-          Quick help
-        </summary>
+        <summary class="cursor-pointer font-semibold text-slate-300">Quick help</summary>
         <div class="mt-2">
           <ul class="list-disc space-y-1 pl-6">
             <li>
-              Press
-              <span
+              Press <span
                 class="inline-flex items-center rounded-md border border-slate-600 bg-slate-900 px-1.5 py-0.5 font-mono text-[11px] text-slate-300">Space</span>
               to reveal, then
               <span
