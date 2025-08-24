@@ -19,6 +19,11 @@ const newPill = $('#new-pill') as HTMLElement;
 const metaId = $('#meta-id') as HTMLElement;
 const metaNext = $('#meta-next') as HTMLElement;
 const metaStats = $('#meta-stats') as HTMLElement;
+const settingsBtn = $('#settings-btn') as HTMLButtonElement;
+const settingsDialog = $('#settings-dialog') as HTMLDialogElement;
+const targetRInput = $('#targetR-input') as HTMLInputElement;
+const settingsForm = $('#settings-form') as HTMLFormElement;
+const settingsCancel = $('#settings-cancel') as HTMLButtonElement;
 
 let STATE: AppState = loadState();
 let CARDS: Card[] = cards;
@@ -97,7 +102,7 @@ function rate(grade: 1|2|3|4) {
     due: +prev.due  || nowMs(),
     reps: +prev.reps || 0,
     lapses: +prev.lapses || 0
-  }, grade, nowMs());
+  }, grade, nowMs(), STATE.targetR);
 
   STATE.cards[id] = next;
   saveState(STATE);
@@ -151,6 +156,23 @@ $('#reset-btn')!.addEventListener('click', () => {
 
 $('#help-btn')!.addEventListener('click', () => {
   const d = document.getElementById('help') as HTMLDetailsElement; if (d) d.open = !d.open;
+});
+
+settingsBtn.addEventListener('click', () => {
+  targetRInput.value = Math.round((STATE.targetR || 0.9) * 100).toString();
+  settingsDialog.showModal();
+});
+
+settingsCancel.addEventListener('click', () => settingsDialog.close());
+
+settingsForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const val = parseFloat(targetRInput.value);
+  if (!isNaN(val)) {
+    STATE.targetR = Math.max(0.5, Math.min(0.99, val / 100));
+    saveState(STATE);
+  }
+  settingsDialog.close();
 });
 
 // Initial render

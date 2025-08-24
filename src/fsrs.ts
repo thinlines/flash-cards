@@ -48,12 +48,17 @@ const S_after_lapse = (D: number, S: number, R: number) => {
   return W[11] * Math.pow(D, -W[12]) * (Math.pow(S + 1, W[13]) - 1) * Math.exp(W[14] * (1 - R));
 };
 
-export function fsrs45Next(prev: ReviewState, grade: 1|2|3|4, now: number): Required<ReviewState> {
+export function fsrs45Next(
+  prev: ReviewState,
+  grade: 1|2|3|4,
+  now: number,
+  targetR: number = TARGET_R
+): Required<ReviewState> {
   const isFirst = !isFinite(prev.S!) || !isFinite(prev.D!);
   if (isFirst) {
     const S = S0(grade);
     const D = clamp(D0(grade), 1, 10);
-    const I = Math.max(0.01, I_of_rS(TARGET_R, S));
+    const I = Math.max(0.01, I_of_rS(targetR, S));
     return { S, D, last: now, due: now + I * 86400000, reps: 1, lapses: grade === 1 ? 1 : 0 };
   }
 
@@ -61,7 +66,7 @@ export function fsrs45Next(prev: ReviewState, grade: 1|2|3|4, now: number): Requ
   const R = clamp(R_of_tS(t, prev.S!), 0, 1);
   const Dn = clamp(D_next(prev.D!, grade), 1, 10);
   const Sn = (grade >= 3) ? S_after_success(Dn, prev.S!, R, grade) : S_after_lapse(Dn, prev.S!, R);
-  const I = Math.max(0.01, I_of_rS(TARGET_R, Sn));
+  const I = Math.max(0.01, I_of_rS(targetR, Sn));
 
   return {
     S: Sn, D: Dn, last: now, due: now + I * 86400000,
