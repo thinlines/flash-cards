@@ -53,10 +53,17 @@ function updatePills() {
 function pickNext() {
   const now = nowMs();
   QUEUE = buildQueue(CARDS, STATE, now);
-  current = QUEUE.due[0] || (allowAhead ? (QUEUE.unseen[0] || QUEUE.future[0]) : null);
+
+  const hasDue = QUEUE.due.length > 0;
+  const hasNew = QUEUE.unseen.length > 0;
+  const hasFuture = QUEUE.future.length > 0;
+
+  // Always allow NEW cards; gate only FUTURE behind "Study ahead"
+  current = QUEUE.due[0] || QUEUE.unseen[0] || (allowAhead ? QUEUE.future[0] : null);
 
   if (!current) {
-    if (QUEUE.due.length === 0 && !allowAhead && (QUEUE.unseen.length || QUEUE.future.length)) {
+    // If there are future cards but we're not studying ahead yet
+    if (!hasDue && !hasNew && hasFuture && !allowAhead) {
       front.textContent = "All due cards are finished — 🎉";
       back.textContent = "Press \"Study ahead\" to review cards early.";
       back.classList.remove('hidden');
@@ -64,6 +71,7 @@ function pickNext() {
       rateRow.classList.add('hidden');
       aheadRow.classList.remove('hidden');
     } else {
+      // True finish: no due and no new
       front.textContent = "All done for now — 🎉";
       back.textContent = "Come back later when cards are due.";
       back.classList.remove('hidden');
@@ -78,6 +86,7 @@ function pickNext() {
     return;
   }
 
+  // Render the selected card
   front.textContent = current.card.front;
   back.textContent = current.card.back;
   back.classList.add('hidden');
