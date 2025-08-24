@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "source": [
-    "src/index.html"
+    "src/index.html",
+    "src/list.html"
   ],
   "type": "module",
   "scripts": {
