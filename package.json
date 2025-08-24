@@ -1,13 +1,20 @@
 {
-  "name": "fsrs-flashcards",
+  "name": "flash-cards",
   "private": true,
+  "version": "0.0.0",
+  "source": [
+    "src/index.html",
+    "src/main.ts",
+    "src/styles.css"
+  ],
   "type": "module",
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html --public-url ./",
+    "dev": "parcel",
+    "build": "parcel build --public-url ./",
     "postbuild": "inline-source dist/index.html dist/index.html"
   },
   "devDependencies": {
+    "@parcel/transformer-inline-string": "2.15.4",
     "inline-source-cli": "^2.0.0",
     "parcel": "^2.15.4",
     "typescript": "^5.6.2"

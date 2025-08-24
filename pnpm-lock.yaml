@@ -11,6 +11,9 @@ importers:
 
   .:
     devDependencies:
+      '@parcel/transformer-inline-string':
+        specifier: 2.15.4
+        version: 2.15.4(@parcel/core@2.15.4(@swc/helpers@0.5.17))
       inline-source-cli:
         specifier: ^2.0.0
         version: 2.0.0
@@ -332,6 +335,10 @@ packages:
     engines: {node: '>= 16.0.0', parcel: ^2.15.4}
     peerDependencies:
       '@parcel/core': ^2.15.4
+
+  '@parcel/transformer-inline-string@2.15.4':
+    resolution: {integrity: sha512-gXxV+bR3WtZ57E3qi0tFTRUEvT0U84OuI6PcL7ufrCSgZ3S/a4K2ZSw7DMuXvcL2KLh3FOVi/9O/Qp+X1qwk9g==}
+    engines: {node: '>= 16.0.0', parcel: ^2.15.4}
 
   '@parcel/transformer-js@2.15.4':
     resolution: {integrity: sha512-HX76PalPjqCLmXJnuSeMr2km8WlnUsW8oaRZ6FuZtSo9QD8BqIcwKGxSbIy9JHkObBgmrMOVpGtYrJM4/BlYbg==}
@@ -2033,6 +2040,13 @@ snapshots:
       '@parcel/workers': 2.15.4(@parcel/core@2.15.4(@swc/helpers@0.5.17))
       nullthrows: 1.1.1
     transitivePeerDependencies:
+      - napi-wasm
+
+  '@parcel/transformer-inline-string@2.15.4(@parcel/core@2.15.4(@swc/helpers@0.5.17))':
+    dependencies:
+      '@parcel/plugin': 2.15.4(@parcel/core@2.15.4(@swc/helpers@0.5.17))
+    transitivePeerDependencies:
+      - '@parcel/core'
       - napi-wasm
 
   '@parcel/transformer-js@2.15.4(@parcel/core@2.15.4(@swc/helpers@0.5.17))':
