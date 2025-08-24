@@ -1,0 +1,8 @@
+[
+  {"id":"pt-01","front":"PT 🇵🇹: Como se diz \"coffee\" em português?","back":"café"},
+  {"id":"pt-02","front":"PT 🇵🇹: \"thank you\" (masculine)?","back":"obrigado"},
+  {"id":"pt-03","front":"PT 🇵🇹: Pretérito de \"ir\" (eu)?","back":"fui"},
+  {"id":"ml-01","front":"ML: What does SVM stand for?","back":"Support Vector Machine"},
+  {"id":"tax-01","front":"US Taxes: Standard deduction (MFJ) for 2025?","back":"$30,000 (provisional)"},
+  {"id":"photo-01","front":"Photography: \"RAW\" files are…","back":"sensor data with minimal processing"}
+]

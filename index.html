@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FSRS Flashcards</title>
+  <link rel="stylesheet" href="./src/styles.css" inline>
+</head>
+<body>
+  <div class="app">
+    <div class="bar">
+      <div class="title">FSRS Flashcards</div>
+      <span id="due-pill" class="pill">Due: 0</span>
+      <span id="new-pill" class="pill">New: 0</span>
+      <span class="spacer"></span>
+      <button class="btn" id="export-btn" title="Download your study state as JSON">Export</button>
+      <label class="btn" for="import-input" title="Restore study state from JSON" style="cursor:pointer">Import</label>
+      <input id="import-input" type="file" accept="application/json" class="hidden" />
+      <button class="btn" id="reset-btn" title="Forget progress for this deck">Reset</button>
+      <button class="btn" id="help-btn" title="How to use">?</button>
+    </div>
+
+    <div id="card" class="card">
+      <div id="front" class="q">Loading…</div>
+      <div id="back" class="a hidden"></div>
+
+      <div id="show-row" class="row" style="margin-top:16px">
+        <button class="btn" id="reveal-btn">Show answer <span class="kbd">Space</span></button>
+      </div>
+
+      <div id="rate-row" class="actions hidden" style="margin-top:12px">
+        <button class="btn again" data-grade="1">Again <span class="kbd">1</span></button>
+        <button class="btn hard"  data-grade="2">Hard  <span class="kbd">2</span></button>
+        <button class="btn good"  data-grade="3">Good  <span class="kbd">3</span></button>
+        <button class="btn easy"  data-grade="4">Easy  <span class="kbd">4</span></button>
+      </div>
+
+      <div class="meta">
+        <span id="meta-id"></span>
+        <span id="meta-next"></span>
+        <span id="meta-stats"></span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <details id="help">
+        <summary>Quick help</summary>
+        <div style="margin-top:8px">
+          <ul>
+            <li>Press <span class="kbd">Space</span> to reveal, then <span class="kbd">1</span>/<span class="kbd">2</span>/<span class="kbd">3</span>/<span class="kbd">4</span> for Again/Hard/Good/Easy.</li>
+            <li>Your progress is saved locally (no accounts/servers). Use <em>Export</em> to back it up.</li>
+            <li>Edit cards in <code>src/cards.json</code>. The build will inline them into the final single HTML.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Parcel will bundle this and our postbuild step will inline it so the final file is one HTML -->
+  <script type="module" src="./src/main.ts" inline></script>
+</body>
+</html>
