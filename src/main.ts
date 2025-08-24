@@ -13,6 +13,8 @@ const front = $('#front') as HTMLElement;
 const back  = $('#back') as HTMLElement;
 const revealBtn = $('#reveal-btn') as HTMLButtonElement;
 const showRow = $('#show-row') as HTMLElement;
+const aheadRow = $('#ahead-row') as HTMLElement;
+const aheadBtn = $('#ahead-btn') as HTMLButtonElement;
 const rateRow = $('#rate-row') as HTMLElement;
 const duePill = $('#due-pill') as HTMLElement;
 const newPill = $('#new-pill') as HTMLElement;
@@ -26,6 +28,7 @@ let CARDS: Card[] = cards;
 type Item = { card: Card; st: ReviewState };
 let QUEUE: { due: Item[]; unseen: Item[]; future: Item[] } = { due: [], unseen: [], future: [] };
 let current: Item | null = null;
+let allowAhead = false;
 
 function buildQueue(cards: Card[], state: AppState, now: number) {
   const items: Item[] = cards.map(c => ({ card: c, st: state.cards[c.id] || {} }));
@@ -50,13 +53,24 @@ function updatePills() {
 function pickNext() {
   const now = nowMs();
   QUEUE = buildQueue(CARDS, STATE, now);
-  current = QUEUE.due[0] || QUEUE.unseen[0] || QUEUE.future[0] || null;
+  current = QUEUE.due[0] || (allowAhead ? (QUEUE.unseen[0] || QUEUE.future[0]) : null);
+
   if (!current) {
-    front.textContent = "All done for now — 🎉";
-    back.textContent = "Come back later when cards are due.";
-    back.classList.remove('hidden');
-    showRow.classList.add('hidden');
-    rateRow.classList.add('hidden');
+    if (QUEUE.due.length === 0 && !allowAhead && (QUEUE.unseen.length || QUEUE.future.length)) {
+      front.textContent = "All due cards are finished — 🎉";
+      back.textContent = "Press \"Study ahead\" to review cards early.";
+      back.classList.remove('hidden');
+      showRow.classList.add('hidden');
+      rateRow.classList.add('hidden');
+      aheadRow.classList.remove('hidden');
+    } else {
+      front.textContent = "All done for now — 🎉";
+      back.textContent = "Come back later when cards are due.";
+      back.classList.remove('hidden');
+      showRow.classList.add('hidden');
+      rateRow.classList.add('hidden');
+      aheadRow.classList.add('hidden');
+    }
     metaId.textContent = "";
     metaNext.textContent = "";
     metaStats.textContent = "";
@@ -69,6 +83,7 @@ function pickNext() {
   back.classList.add('hidden');
   showRow.classList.remove('hidden');
   rateRow.classList.add('hidden');
+  aheadRow.classList.add('hidden');
 
   const st = current.st || {};
   metaId.textContent = `#${current.card.id}`;
@@ -108,6 +123,10 @@ function rate(grade: 1|2|3|4) {
 revealBtn.addEventListener('click', reveal);
 rateRow.querySelectorAll('button').forEach(btn => {
   btn.addEventListener('click', () => rate(parseInt((btn as HTMLButtonElement).dataset.grade!, 10) as 1|2|3|4));
+});
+aheadBtn.addEventListener('click', () => {
+  allowAhead = true;
+  pickNext();
 });
 
 // Keyboard
